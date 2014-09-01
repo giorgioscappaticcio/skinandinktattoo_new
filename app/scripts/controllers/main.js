@@ -40,10 +40,14 @@ angular.module('skinandinkApp')
   	      $scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
   	    };
 
+        $scope.toggleNews = function() {
+          $scope.newsIsVisible = ! $scope.newsIsVisible;
+        };
+
   	    // Default the blocks to be visible.
   	    $scope.galleryIsVisible = false;
-
-  	    $scope.singleTattooIsVisible = false;
+        $scope.singleTattooIsVisible = false;
+        $scope.newsIsVisible = false;
 
   	    CommonMain.getData().then( function(d) {
   	      

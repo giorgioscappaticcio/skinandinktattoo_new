@@ -10,18 +10,15 @@
       </div>
       <div class="w-clearfix nav_desktop_roght">
         <a class="button" href="#">BOOK NOW</a>
-        <a class="button" href="#">NEWS</a>
+        <a class="button" ng-click="toggleNews()" href="">NEWS</a>
       </div>
     </div>
   </div>
-
-
 
   <div id="h" class="animated">
     <div class="section hero" ng-controller="SliderController">
       <slider images="images" />
     </div>
-
     <div class="section" id="info">
       <div class="w-container">
         <div class="w-row">
@@ -53,10 +50,12 @@
       </div>
       <div></div>
     </div>
-    
   </div><!-- END home -->
 
   <!-- Image Gallery Popup -->
  <div gallerypopup="galleryIsVisible" class="animated"></div>
  <!-- Single Tattoo Popup -->
  <div singletattoo="singleTattooIsVisible" class="animated"></div>
+ <!-- News Popup -->
+ <div newspage="newsIsVisible" class="animated"></div>
+

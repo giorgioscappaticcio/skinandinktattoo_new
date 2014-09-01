@@ -291,6 +291,32 @@ module.exports = function (grunt) {
       }
     },
 
+    // ngtemplates 
+    ngtemplates:  {
+       app:        {
+        src:      ['./**/views/**.html', './**/views/**/**.html'],
+        dest:     '<%= yeoman.dist %>/scripts/app.templates.js',
+        options: {
+         prefix: '/',
+         //usemin: 'scripts/scripts.js',
+         module: 'skinandinkApp',
+         url: function(url) {
+          return url.replace('./app/', ''); // fix for absolute path urls
+         },
+         htmlmin: {
+          collapseBooleanAttributes:      true,
+          collapseWhitespace:             true,
+          removeAttributeQuotes:          false,
+          removeComments:                 true,
+          removeEmptyAttributes:          false,
+          removeRedundantAttributes:      false,
+          removeScriptTypeAttributes:     true,
+          removeStyleLinkTypeAttributes:  true
+         }
+        }
+       }
+    },
+
     // Replace Google CDN references
     cdnify: {
       dist: {
@@ -388,6 +414,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'ngtemplates',
     'concat',
     'ngmin',
     'copy:dist',
