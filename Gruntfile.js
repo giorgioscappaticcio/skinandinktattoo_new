@@ -341,6 +341,11 @@ module.exports = function (grunt) {
             'fonts/*'
           ]
         }, {
+          expand: true, 
+          cwd: 'bower_components/fontawesome/fonts/', 
+          src: ['**'], 
+          dest: '<%= yeoman.dist %>/fonts/'
+        }, {
           expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
@@ -421,7 +426,7 @@ module.exports = function (grunt) {
     'cdnify',
     'cssmin',
     'uglify',
-    'filerev',
+    //'filerev',
     'usemin',
     'htmlmin'
   ]);
