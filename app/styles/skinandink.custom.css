@@ -1,0 +1,209 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+
+.loading{
+	margin-top:0px;
+}
+.loader-container{
+	border:none;
+	background-color: transparent;
+	width: 180px;
+	height: 180px;
+	margin-left: -90px;
+	margin-top: -90px;
+	box-shadow: none;
+}
+#loading > div.logoFull{
+	position: fixed;
+	width: 241px;
+	height:45px;
+	top:56%;
+	left: 50%;
+	margin-left: -120px;
+	margin-top: 4px;
+	z-index: 9;
+}
+.loader-svg{
+	margin-top: -51px;
+}
+.loader-svg p{
+  width:230px;
+  height: 10px;
+  font-size: 12px;
+  margin-left: 2px;
+  text-align: center;
+  color:#a7a7a7;
+}
+
+.hide{
+	display: none;
+}
+.back_home {
+  position: absolute;
+  top: 0px;
+  right: 6px;
+  z-index: 99;
+  padding: 10px;
+  background-color: #870000;
+  font-family: Oswald, sans-serif;
+  color: #ededed;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+.back_home:hover i {
+  	-webkit-animation: rotate 0.3s; /* Chrome, Safari, Opera */
+  	-webkit-animation-fill-mode: forwards;
+    animation: rotate 0.3s;
+    animation-fill-mode: forwards;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rotate {
+    from {
+    	transform:rotate(0deg);
+    	-ms-transform:rotate(0deg); /* IE 9 */
+    	-webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */
+    }
+    to {
+    	transform:rotate(-90deg);
+    	-ms-transform:rotate(-90deg); /* IE 9 */
+    	-webkit-transform:rotate(-90deg); /* Opera, Chrome, and Safari */
+    }
+}
+
+/* Standard syntax */
+@keyframes rotate {
+    from {
+    	transform:rotate(0deg);
+    	-ms-transform:rotate(0deg); /* IE 9 */
+    	-webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */
+    }
+    to {
+    	transform:rotate(-90deg);
+    	-ms-transform:rotate(-90deg); /* IE 9 */
+    	-webkit-transform:rotate(-90deg); /* Opera, Chrome, and Safari */
+    }
+}
+
+.big_thumb{
+	background-color:black;
+	margin-bottom: 10px;
+	margin-top:6px;
+	cursor: pointer;
+}
+.thumb{
+	border: 1px solid;
+}
+.thumb:hover,
+.big_thumb:hover{
+	opacity: 0.8;
+}
+
+.arrow,
+.circle_thumb,
+.thumb{
+	cursor: pointer;
+}
+
+.back_home {
+	cursor: pointer;
+	z-index: 9;
+}
+
+/* SLIDER ANIMATION */
+.sliderGallery div.ng-hide-add,
+.w-slide.ng-hide-add {
+    opacity:1;
+
+    -webkit-transition:.5s ease all;
+    -moz-transition:.5s ease all;
+    -o-transition:.5s ease all;
+    transition:.5s ease all;
+}
+.sliderGallery div.ng-hide-add.ng-hide-add-active,
+.w-slide.ng-hide-add.ng-hide-add-active {
+    opacity:0;
+}
+.sliderGallery div.ng-hide-remove,
+.w-slide.ng-hide-remove {
+    -webkit-transition:.5s ease all;
+    -moz-transition:.5s ease all;
+    -o-transition:.5s ease all;
+    transition:.5s ease all;
+
+    display:block!important;
+    opacity:0;
+}
+.sliderGallery div, .sliderGallery div.ng-hide-remove.ng-hide-remove-active,
+.w-slide, .w-slide.ng-hide-remove.ng-hide-remove-active  {
+    opacity:1;
+}
+
+/* GOOGLE MAP */
+.angular-google-map-container { height: 300px; }
+
+/* ICONS FONT AWESOME 4.1.0 */
+[class^="w-icon-"], [class*=" w-icon-"] {
+	font-family: 'FontAwesome';
+}
+.w-icon-slider-left:before {
+	content: "\f0d9";
+	color: #DCDCDC;
+	font-size: 30px;
+}
+.w-icon-slider-right:before {
+	content: "\f0da";
+	color: #DCDCDC;
+	font-size: 30px;
+}
+
+
+/* SPINNERS LOADER */
+.loaderCont {
+  text-align: center;
+  padding-top: 150px;
+  height: 100%;
+}
+
+.loaderCont i,
+ .w-row.loader i,
+ .bigLoader .loaderCenter i{
+  font-size: 30px;
+  color:grey;
+  -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+.w-row.loader {
+  text-align: center;
+  padding-top: 150px;
+  min-height: 300px;
+}
+
+.bigLoader {
+  position:fixed;
+  top:0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.9);
+  z-index: 9;
+}
+.bigLoader .loaderCenter {
+  position:absolute;
+  width:30px;
+  height: 30px;
+  top:40%;
+  left:50%;
+  margin-top: -15px;
+  margin-left: -15px;
+  z-index: 99;
+}
+
+/* LOADING SPINNER ANIMATION */
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+

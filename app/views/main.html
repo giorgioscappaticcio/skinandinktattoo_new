@@ -1,0 +1,62 @@
+<div class="nav-section">
+    <div class="w-container">
+      <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400"></div>
+      <div class="logo">
+        <img src="images/logo_skinandink.jpg" alt="logo_skinandink.jpg">
+      </div>
+      <div class="w-clearfix nav_desktop">
+        <a class="button" ng-click="toggleGallery('piercing')" href="">BODY&nbsp;PIERCING</a>
+        <a class="button openFullBg" href="" ng-click="toggleTattoo()">TATTOO</a>
+      </div>
+      <div class="w-clearfix nav_desktop_roght">
+        <a class="button" href="#">BOOK NOW</a>
+        <a class="button" href="#">NEWS</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="h" class="animated">
+    <div class="section hero" ng-controller="SliderController">
+      <slider images="images" />
+    </div>
+
+    <div class="section" id="info">
+      <div class="w-container">
+        <div class="w-row">
+          <div class="w-col w-col-6">
+            <h3>About:</h3>
+            <p class="fb_description" ng-bind="infoObj.description"></p>
+            <h3>Gallery:</h3>
+            <div class="w-row gallery_thumb_left_col">
+              <div class="w-col w-col-3" ng-repeat="photo in photosObj | limitTo: 4">
+                <div class="thumb thumb00_{{$index}}" style="background-image:url({{photo.images[photo.images.length -1].source}})" ng-click="toggleGallery('studio')"></div>
+              </div>
+            </div>
+          </div>
+          <div class="w-col w-col-6">
+            <h3>Info:</h3>
+            <p>Phone:&nbsp;<strong><span class="fb_phone" ng-bind="infoObj.phone"></span></strong>
+              <br>
+              <br>Hours:&nbsp;<strong>Mon – Sat</strong>: 11:00 – 18:00
+              <br>
+              <br>Address:<strong> <span class="fb_street" ng-bind="infoObj.location.street"></span></strong>
+            </p>
+            <div class="w-widget w-widget-map">
+            <google-map center="map.center" zoom="map.zoom" draggable="map.draggable" control="map.control">
+              <marker coords="map.center" icon="map.icon"></marker>
+            </google-map>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+    
+  </div><!-- END home -->
+
+  <!-- Image Gallery Popup -->
+ <div gallerypopup="galleryIsVisible" class="animated"></div>
+ <!-- Single Tattoo Popup -->
+ <div singletattoo="singleTattooIsVisible" class="animated"></div>

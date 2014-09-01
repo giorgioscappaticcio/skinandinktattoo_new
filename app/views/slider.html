@@ -1,0 +1,19 @@
+<div class="w-container main_slider_container">
+  <div class="w-slider main_slider">
+    <div class="w-slider-mask">
+      <div class="w-slide" ng-repeat="image in images" ng-show="image.visible" >
+        <img ng-src="{{image.src}}">
+      </div>
+    </div>
+    <div class="w-slider-arrow-left">
+      <div class="w-icon-slider-left" ng-click="prev()"></div>
+    </div>
+    <div class="w-slider-arrow-right">
+      <div class="w-icon-slider-right" ng-click="next()"></div>
+    </div>
+    <div class="w-slider-nav w-round">
+    	<div class="w-slider-dot" ng-repeat="image in images track by $index" ng-click="goToPic($index)" ng-class="{'w-active': $index == currentIndex}">
+    	</div>
+    </div>
+  </div>
+</div>
