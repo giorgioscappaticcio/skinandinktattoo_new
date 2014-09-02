@@ -57,6 +57,12 @@
     animation-fill-mode: forwards;
 }
 
+#news ul li {
+  width: 46%;
+  display: inline-block;
+  margin-left: 1%;
+}
+
 /* Chrome, Safari, Opera */
 @-webkit-keyframes rotate {
     from {
