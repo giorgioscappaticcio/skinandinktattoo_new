@@ -5,12 +5,12 @@
         <img src="images/logo_skinandink.jpg" alt="logo_skinandink.jpg">
       </div>
       <div class="w-clearfix nav_desktop">
-        <a class="button" ng-click="toggleGallery('piercing')" href="">BODY&nbsp;PIERCING</a>
-        <a class="button openFullBg" href="" ng-click="toggleTattoo()">TATTOO</a>
+        <a class="button" ng-click="toggleGallery('piercing',true)" ng-class="{active: piercIsActive}" href="">BODY&nbsp;PIERCING</a>
+        <a class="button openFullBg" ng-class="{active: tattooIsActive}" ng-click="toggleTattoo()" href="">ARTISTS</a>
       </div>
       <div class="w-clearfix nav_desktop_roght">
         <a class="button" href="#">BOOK NOW</a>
-        <a class="button" ng-click="toggleNews()" href="">NEWS</a>
+        <a class="button" ng-class="{active: newsIsActive}" ng-click="toggleNews()" href="">NEWS</a>
       </div>
     </div>
   </div>

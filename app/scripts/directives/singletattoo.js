@@ -157,7 +157,7 @@ angular.module('skinandinkApp')
 			// Ignore first-run values since we've
 			// already defaulted the element state.
 			if ( newValue === oldValue ) {
-				element.hide()
+				element.hide();
 			}
 			// Show element.
 			if ( newValue ) {
@@ -178,13 +178,19 @@ angular.module('skinandinkApp')
 		            setTimeout(function(){
 		                $scope.galleryIsVisible = ! $scope.galleryIsVisible;
 		            },700);
+		        } else if ($scope.newsIsVisible) {
+		            var elementToHide = $('div[newspage="newsIsVisible"]');
+		            $scope.newsIsVisible = false;
 		        } else {
-		            var elementToHide = $('#h');
+		        	var elementToHide = $('#h');
 		        }
 				var body = $document.find('body').eq(0);
 				body.animate({scrollTop:0}, '500', 'swing', function() { 
 				   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
 			     	setTimeout(function(){
+			     		$scope.tattooIsActive = true;
+			     		$scope.piercIsActive = false;
+			     		$scope.newsIsActive = false;
 			     		elementToHide.hide();
 			     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
 			     		setTimeout(function(){
@@ -196,7 +202,8 @@ angular.module('skinandinkApp')
 				return;
 			// Hide element.
 			} else {
-				element.hide();
+				return;
+				//element.hide();
 				 
 			}
 		});

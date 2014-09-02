@@ -25,36 +25,40 @@ angular.module('skinandinkApp')
 		$scope.$watch(expression,function( newValue, oldValue ) {
 
 			if ( newValue === oldValue ) {
-				return;
+				element.hide();
 			}
 
 			// Show element.
 			if ( newValue ) {
 		        
-		        if ($scope.galleryIsVisible){
+				if ($scope.galleryIsVisible){
 		            var elementToHide = $('div[gallerypopup="galleryIsVisible"]');
 		            setTimeout(function(){
 		                $scope.galleryIsVisible = ! $scope.galleryIsVisible;
 		            },700);
+		        } else if ($scope.singleTattooIsVisible) {
+		            var elementToHide = $('div[singletattoo="singleTattooIsVisible"]');
+		            $scope.singleTattooIsVisible = false;
 		        } else {
-		            var elementToHide = $('#h');
+		        	var elementToHide = $('#h');
 		        }
 				var body = $document.find('body').eq(0);
 				body.animate({scrollTop:0}, '500', 'swing', function() { 
 				   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
 			     	setTimeout(function(){
+			     		$scope.tattooIsActive = false;
+			     		$scope.piercIsActive = false;
+			     		$scope.newsIsActive = true;
 			     		elementToHide.hide();
 			     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
 			     		setTimeout(function(){
 			     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
 			     		},200);
-
-			     	},600);
+					},600);
 				});
-				
 			// Hide element.
 			} else {
-				element.hide();
+				return;
 			}
 		});
 

@@ -31,17 +31,20 @@ angular.module('skinandinkApp')
   	  	
 
   	  	// I toggle the value of isVisible.
-  	    $scope.toggleGallery = function(album) {
-  	        $scope.galleryIsVisible = ! $scope.galleryIsVisible;
+  	    $scope.toggleGallery = function(album, ispiercing) {
+  	        $scope.galleryIsVisible = true;
   	        $scope.fbAlbum = album;
+            if (ispiercing){
+              $scope.piercIsActive = true;
+            }
   	    };
 
   	    $scope.toggleTattoo = function() {
-  	      $scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
+  	      $scope.singleTattooIsVisible = true;
   	    };
 
         $scope.toggleNews = function() {
-          $scope.newsIsVisible = ! $scope.newsIsVisible;
+          $scope.newsIsVisible = true;
         };
 
   	    // Default the blocks to be visible.

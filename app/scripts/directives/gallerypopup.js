@@ -141,24 +141,25 @@ angular.module('skinandinkApp')
 	      			$scope.photosObjGallery = {};
 	      		});
 		      	
-		      	
-
-		    	// Ignore first-run values since we've
+		      	// Ignore first-run values since we've
 		    	// already defaulted the element state.
 		    	if ( newValue === oldValue ) {
-		    		return;
+		    		element.hide();
 		    	}
 		    	// Show element.
 		    	if ( newValue ) {
-		    		if ($scope.singleTattooIsVisible){
+		    		if ($scope.singleTattooIsVisible || $scope.newsIsVisible){
 		    			var elementToHide = $('div[singletattoo="singleTattooIsVisible"]');
 		    			setTimeout(function(){
-		    				$scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
+		    				$scope.singleTattooIsVisible = false;
+		    				$scope.newsIsVisible = false;
 		    			},700);
-		    			
 		    		} else {
+		    			$scope.tattooIsActive = false;
+		    			$scope.newsIsActive = false;
 		    			var elementToHide = $('#h');
-		    		}
+					};
+
 		    		$scope._Index = 0;
 		    		var body = $document.find('body').eq(0);
 		    		body.animate({scrollTop:0}, '500', 'swing', function() { 
@@ -174,7 +175,6 @@ angular.module('skinandinkApp')
 
 		    	// Hide element.
 		    	} else {
-		    		
 		    		if(element.is(":visible")){
 		    			$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
 		    			setTimeout(function(){
