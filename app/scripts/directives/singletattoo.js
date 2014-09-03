@@ -13,20 +13,18 @@ angular.module('skinandinkApp')
 		restrict: 'AE',
 		link: function link($scope, element, attrs, $log) {
 
-
-
 			$scope.tattooPosition = 0;
 
 			$scope.generalInfoLoaded = false;
 
 			$scope.thumbLimit = 6;
 
-		$scope.cover_w = 851;
-		$scope.cover_h = 316;
+			$scope.cover_w = 851;
+			$scope.cover_h = 316;
 
-		$scope.nextTattoo = function(){
-				$scope.tattooPosition < $scope.tattooProfilePic.length - 1 ? $scope.tattooPosition++ : $scope.tattooPosition = 0;
-		}
+			$scope.nextTattoo = function(){
+					$scope.tattooPosition < $scope.tattooProfilePic.length - 1 ? $scope.tattooPosition++ : $scope.tattooPosition = 0;
+			}
 
 			$scope.prevTattoo = function(){
 				$scope.tattooPosition > 0 ? $scope.tattooPosition-- : $scope.tattooPosition = $scope.tattooProfilePic.length - 1;

@@ -52,6 +52,7 @@ angular.module('skinandinkApp')
         $scope.galleryIsVisible = false;
         $scope.singleTattooIsVisible = false;
         $scope.newsIsVisible = false;
+        $scope.bookNowIsVisible = false;
         $scope.ispiercing = false;
     }
 
@@ -146,6 +147,10 @@ angular.module('skinandinkApp')
       $scope.newsIsVisible = true;
     };
 
+    $scope.toggleBookNow = function() {
+      $scope.bookNowIsVisible = true;
+    };
+
   	    
 
     CommonMain.getData().then( function(d) {
@@ -158,13 +163,13 @@ angular.module('skinandinkApp')
           
           if(d){
             $scope.infoObj = c;
-          $log.debug('center', $scope.infoObj);
-          $scope.center = {
-            latitude: c.location.latitude,
-            longitude: c.location.longitude
-          }
-          $log.debug('center', $scope.center);
-          $scope.map.control.refresh($scope.center);
+            $log.debug('center', $scope.infoObj);
+            $scope.center = {
+              latitude: c.location.latitude,
+              longitude: c.location.longitude
+            }
+            $log.debug('center', $scope.center);
+            $scope.map.control.refresh($scope.center);
           }
         }, function(c) {
           // request rejected (error)

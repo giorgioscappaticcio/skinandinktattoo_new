@@ -163,11 +163,11 @@ angular.module('skinandinkApp')
 		    	     		
 		    	     		setTimeout(function(){
 		    	     			$scope.backBtn.removeClass('slideOutUp').addClass('slideInDown');
-		    	     			$scope.resetActiveAll();
-		    	     			$scope.galleryIsVisible = true;
 		    	     			if ($scope.ispiercing){
 					              $scope.piercIsActive = true;
 					            }
+		    	     			$scope.resetActiveSection();
+		    	     			$scope.galleryIsVisible = true;
 		    	     			if ($scope.currentSection.isTattooGallery){
 		    	     				$scope.singleTattooIsVisible = true;
 		    	     				$scope.tattooIsActive = true;

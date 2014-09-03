@@ -203,7 +203,7 @@ p {
   overflow-x: hidden;
   overflow-y: hidden;
   width: 130px;
-  height: 140px;
+  height: 138px;
   margin-left: -75px;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -419,8 +419,8 @@ p {
   width: 50px;
   height: 100%;
   padding-top: 25px;
-  /*padding-right: 8px;
-  padding-left: 8px;*/
+  padding-right: 8px;
+  padding-left: 8px;
   background-color: #171717;
   font-family: Oswald, sans-serif;
   font-size: 50px;
@@ -430,7 +430,7 @@ p {
 }
 .arrow.left {
   /*margin-left: 4px;*/
-  /*padding-left: 8px;*/
+  padding-left: 10px;
   background-color: #1f1f1f;
 }
 .arrow.left:hover {
@@ -439,9 +439,9 @@ p {
 .arrow.right {
   top: 0px;
   right: 1px;
-  margin-right: 4px;
+  margin-right: 0px;
   margin-left: 0px;
-  /*padding-left: 20px;*/
+  padding-left: 14px;
 }
 /*.back_home {
   position: absolute;
@@ -549,6 +549,24 @@ p {
 .singlle_news_thumb_row {
   margin-top: 10px;
   padding-top: 0px;
+}
+.submit_btn {
+  width: 50%;
+  margin-top: 40px;
+  float: right;
+}
+.separator_100 {
+  height: 100px;
+}
+.form-left-col {
+  padding-right: 47px;
+  padding-left: 100px;
+}
+.form-input {
+  background-color: white;
+}
+.form-right-col {
+  padding-right: 100px;
 }
 @media (max-width: 991px) {
   .hero-column {

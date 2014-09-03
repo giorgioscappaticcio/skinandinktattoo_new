@@ -1,4 +1,16 @@
-@import url(http://fonts.googleapis.com/css?family=Oswald);
+form span.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 60px;
+  float: left;
+}
+
+form span.success {
+  color: green;
+  font-size: 14px;
+  margin-top: 60px;
+  float: left;
+}
 
 .loading{
 	margin-top:0px;

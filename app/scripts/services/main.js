@@ -80,6 +80,29 @@ angular.module('skinandinkApp')
 	};
 
 	
+	this.sendEmail = function(params){
+  		//console.log(params)
+
+  		var d = $q.defer();
+
+  	  	$http({
+  	  		method: 'GET', 
+  	  		url: 'http://giorgioscappaticcio.co.uk/skin_ink/admin/queries/send_email.php',
+  	  		params: params
+  	  	}).
+	    success(function(data, status, headers, config) {
+	    	//console.log (data)
+	    	var superData = data;
+	    	return d.resolve(superData)
+	    }).
+	    error(function(data, status, headers, config) {
+	      return d.reject('you got a problem');
+	    });
+		
+		return d.promise;
+  	}
+
+	
 	
     
   });

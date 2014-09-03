@@ -13,12 +13,12 @@ angular.module('skinandinkApp')
       restrict: 'AE',
       link: function postLink($scope, element, attrs, $log) {
     	
-      	$scope.sectionNews = {
-			name : 'news',
-			div : element,
-			isactive : false,
-			isgallery : false
-		}
+  //     	$scope.sectionNews = {
+		// 	name : 'news',
+		// 	div : element,
+		// 	isactive : false,
+		// 	isgallery : false
+		// }
 
 		
 
@@ -57,8 +57,9 @@ angular.module('skinandinkApp')
 			     		
 			     		setTimeout(function(){
 			     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
-			     			$scope.resetActiveSection();
+			     			$scope.resetActiveAll();
 		    	     		$scope.newsIsVisible = true;
+		    	     		$scope.newsIsActive = true;
 			     		},200);
 					},600);
 				});

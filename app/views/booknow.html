@@ -1,0 +1,104 @@
+<div class="section" id="contact">
+  <div class="w-container">
+    <div class="separator_50"></div>
+    <div class="separator_50"></div>
+    <div class="w-row">
+      <div class="w-col w-col-6 form-left-col">
+        <div class="w-form">
+          <form id="book-form" name="book_form">
+            <h1>Personal Info</h1>
+            
+            <label for="full_name">Full name</label>
+            <input class="w-input form-input" id="full_name" type="text" placeholder="Enter your full name" name="full_name" ng-model="emailForm.full_name">
+            
+            <label for="email-3">Email Address:</label>
+            <input class="w-input" id="email-3" type="email" placeholder="Enter your email address" name="email" ng-model="emailForm.email">
+            
+            <label for="telephone">Telephone number</label>
+            <input class="w-input" id="telephone" type="text" placeholder="Enter your telephone number" name="telephone" required="required" ng-model="emailForm.telephone">
+            
+            <div class="w-checkbox">
+              <input class="w-checkbox-input" id="over_age" type="checkbox" name="over_age" ng-model="emailForm.over_age">
+              <label class="w-form-label" for="personal_design">Are you over 18?</label>
+              <span style="color:red" ng-show="confirmAgeMsg"> 
+              	<i class="fa fa-exclamation-triangle"></i> Please confirm your age
+              </span>
+            </div>
+            
+            <span class="error" ng-show="book_form.$error.email">
+                <i class="fa fa-exclamation-triangle"></i> Please insert a valid email!
+            </span>
+            <span class="error" ng-show="showFormError" ng-bind-html="messageAdd"></span>
+            <span class="success" ng-show="showFormConfirm" ng-bind-html="messageAdd"></span>
+
+        </div>
+      </div>
+      <div class="w-col w-col-6 form-right-col">
+        <div class="w-form">
+          	<h1>Tattoo Info</h1>
+            <label for="tattoo_artist">Tattoo Artist Name</label>
+            <select class="w-select" id="tattoo_artist" name="tattoo_artist" ng-model="emailForm.tattoo_artist" ng-options="artist.name as artist.name for artist in tattooArtistsName track by artist.name">
+            	<option value="">Choose artist name...</option>
+            </select>
+            <div class="w-row">
+              <div class="w-col w-col-7">
+                <label for="tattoo_style">Tattoo style</label>
+                <select class="w-select" id="tattoo_style" name="tattoo_style" ng-model="emailForm.tattoo_style">
+                  	<option value="">Please select</option>
+                  	<option value="Abstract">Abstract</option>
+                  	<option value="Animals">Animals</option>
+                  	<option value="Back Tattoo">Back Tattoo</option>
+                  	<option value="Black-and-gray">Black-and-gray</option>
+                  	<option value="Body Suit">Body Suit</option>
+                  	<option value="Borneo traditional">Borneo traditional</option>
+                  	<option value="Colour">Colour</option>
+                  	<option value="Cute">Cute</option>
+                  	<option value="Fantasy">Fantasy</option>
+                  	<option value="Film">Film</option>
+                  	<option value="Hands">Hands</option>
+                  	<option value="Irezumi">Irezumi</option>
+                  	<option value="Japanese">Japanese</option>
+                  	<option value="Legs">Legs</option>
+                  	<option value="Misc/any">Misc/any</option>
+                  	<option value="Modern">Modern</option>
+                  	<option value="Old school">Old school</option>
+                  	<option value="Polynesian">Polynesian</option>
+                  	<option value="Portrait">Portrait</option>
+                  	<option value="Religious Tattoos">Religious Tattoos</option>
+                  	<option value="Sailor tattoos">Sailor tattoos</option>
+                  	<option value="Sleeves">Sleeves</option>
+                  	<option value="Tikis">Tikis</option>
+                  	<option value="Traditional">Traditional</option>
+                  	<option value="Tribal">Tribal</option>
+                  	<option value="Typography">Typography</option>
+                </select>
+              </div>
+              <div class="w-col w-col-1"></div>
+              <div class="w-col w-col-4">
+                <label for="field">Tattoo type</label>
+                <select class="w-select" id="tattoo_type" name="tattoo_type" ng-model="emailForm.tattoo_type">
+                  <option value="">Select one...</option>
+                  <option value="new tattoo">New Tattoo</option>
+                  <option value="cover up">Cover Up</option>
+                  <option value="adding to existing work">Adding to existing work</option>
+                </select>
+              </div>
+            </div>
+            <label for="description">Tattoo description (tell us a little bit more about your tattoo)</label>
+            <textarea class="w-input" id="description" placeholder="Tell us a little bit more about your tattoo" name="description" ng-model="emailForm.description"></textarea>
+            <div class="w-checkbox">
+              <input class="w-checkbox-input" id="personal_design" type="checkbox" name="personal_design" ng-model="emailForm.personal_design">
+              <label class="w-form-label" for="personal_design">Do you have your own design?</label>
+            </div>
+            <button ng-click="submitBooking(book_form.email.$valid)" class="w-button submit_btn" type="submit"><i class="fa fa-book"></i> Book Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator_100"></div>
+</div>
+<div class="back_home animated slideOutUp" ng-click="closeBtn()"><i class="fa fa-times"></i></div>
+
+
+
