@@ -13,6 +13,15 @@ angular.module('skinandinkApp')
       restrict: 'AE',
       link: function postLink($scope, element, attrs, $log) {
     	
+      	$scope.sectionNews = {
+			name : 'news',
+			div : element,
+			isactive : false,
+			isgallery : false
+		}
+
+		
+
       	var expression = attrs.newspage;
 
       	// I check to see the default display of the
@@ -30,29 +39,26 @@ angular.module('skinandinkApp')
 
 			// Show element.
 			if ( newValue ) {
-		        
-				if ($scope.galleryIsVisible){
-		            var elementToHide = $('div[gallerypopup="galleryIsVisible"]');
-		            setTimeout(function(){
-		                $scope.galleryIsVisible = ! $scope.galleryIsVisible;
-		            },700);
-		        } else if ($scope.singleTattooIsVisible) {
-		            var elementToHide = $('div[singletattoo="singleTattooIsVisible"]');
-		            $scope.singleTattooIsVisible = false;
-		        } else {
-		        	var elementToHide = $('#h');
+
+				$scope.currentSection = {
+		          prev : $scope.currentSection.current,
+		          current : element
 		        }
+		        
 				var body = $document.find('body').eq(0);
+
 				body.animate({scrollTop:0}, '500', 'swing', function() { 
-				   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
+				   	
+				   	$scope.controlSlideAnimation.slideOut($scope.currentSection.prev);
+			     	
 			     	setTimeout(function(){
-			     		$scope.tattooIsActive = false;
-			     		$scope.piercIsActive = false;
-			     		$scope.newsIsActive = true;
-			     		elementToHide.hide();
-			     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
+			     		
+			     		$scope.controlSlideAnimation.slideIn($scope.currentSection.prev, $scope.currentSection.current);
+			     		
 			     		setTimeout(function(){
 			     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
+			     			$scope.resetActiveSection();
+		    	     		$scope.newsIsVisible = true;
 			     		},200);
 					},600);
 				});

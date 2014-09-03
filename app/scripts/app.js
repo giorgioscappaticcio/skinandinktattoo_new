@@ -16,7 +16,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngAnimate',
     'google-maps'
   ])
   .config(function ($routeProvider) {

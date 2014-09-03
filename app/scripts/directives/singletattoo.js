@@ -13,6 +13,8 @@ angular.module('skinandinkApp')
 		restrict: 'AE',
 		link: function link($scope, element, attrs, $log) {
 
+
+
 			$scope.tattooPosition = 0;
 
 			$scope.generalInfoLoaded = false;
@@ -113,17 +115,7 @@ angular.module('skinandinkApp')
 			   
 			    
 		    	
-			$scope.closePanel = function(){
-		    $('.back_home').removeClass('slideInDown').addClass('slideOutUp');
-		    setTimeout(function(){
-		        element.removeClass('slideInLeft').addClass('slideOutLeft');
-		        setTimeout(function(){
-		            element.hide();
-		            $('#h').show().removeClass('slideOutLeft').addClass('slideInLeft');
-		            $scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
-		        },600);
-		    },200); 
-		} 	
+			 	
 		    	
 		    	
 			 
@@ -162,6 +154,12 @@ angular.module('skinandinkApp')
 			// Show element.
 			if ( newValue ) {
 
+				$scope.currentSection = {
+		          prev : $scope.currentSection.current,
+		          current : element,
+		        }
+
+
 				//reset thumb image array
 				$scope.tattooProfilePic = [];
 				// reset tattoo position
@@ -188,9 +186,8 @@ angular.module('skinandinkApp')
 				body.animate({scrollTop:0}, '500', 'swing', function() { 
 				   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
 			     	setTimeout(function(){
+			     		$scope.resetActiveLink();
 			     		$scope.tattooIsActive = true;
-			     		$scope.piercIsActive = false;
-			     		$scope.newsIsActive = false;
 			     		elementToHide.hide();
 			     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
 			     		setTimeout(function(){

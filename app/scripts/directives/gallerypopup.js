@@ -13,8 +13,15 @@ angular.module('skinandinkApp')
       restrict: 'AE',
       link: function link($scope, element, attrs, $log) {
       
-      	
-  		
+      	////////////////////////////
+      	// Initial variable control 
+      	////////////////////////////
+      	var fbAlbumId = null;
+
+      	////////////////////////////
+  		// Picture Slider control
+  		////////////////////////////
+
       	$scope.photos = [];
 
       	// initial image index
@@ -40,100 +47,89 @@ angular.module('skinandinkApp')
       	    $scope._Index = index;
       	};
 
-      	$scope.closeGallery = function(){
-            var elementToShow = $('#h');
-            
-            $('.back_home').removeClass('slideInDown').addClass('slideOutUp');
-            setTimeout(function(){
-                element.removeClass('slideInLeft').addClass('slideOutLeft');
-                setTimeout(function(){
-                    element.hide();
-                    elementToShow.show().removeClass('slideOutLeft').addClass('slideInLeft');
-                },600);
-                $scope.galleryIsVisible = ! $scope.galleryIsVisible;
-            },200); 
-        }
-
-    	$scope.backToTattoo = function(){
-          
-			var elementToShow = $('div[singletattoo="singleTattooIsVisible"]');
-          
-			$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
-    		setTimeout(function(){
-        		element.removeClass('slideInLeft').addClass('slideOutLeft');
-          		setTimeout(function(){
-            		element.hide();
-            		elementToShow.show().removeClass('slideOutLeft').addClass('slideInLeft');
-        		},600);
-          		$scope.galleryIsVisible = ! $scope.galleryIsVisible;
-    		},200); 
-      	}
+      	////////////////////////////
+      	// Close Button control 
+      	////////////////////////////
 
       	$scope.closeBtn = function(){
-      		if ($scope.fbAlbum == 'tattoo'){
-      			$scope.backToTattoo();
-      		} else {
-      			$scope.closeGallery();
-      		}
+      		
+      		$scope.resetActiveAll();
+            
+            if ($scope.currentSection.isTattooGallery){
+	        	$scope.singleTattooIsVisible = true;
+	        	$scope.tattooIsActive = true;
+	        	$scope.currentSection.prev = $scope.currentSection.current;
+				$scope.currentSection.current = $scope.artistsSection;
+	        } else {
+	        	$scope.currentSection.prev = $scope.currentSection.current;
+				$scope.currentSection.current = $scope.homeSection;
+	        }
+
+	        $scope.controlSlideAnimation.totalOut($scope.currentSection.prev, $scope.currentSection.current);
+
       	}
 
-
-      	//$scope.windowHeight = (window.innerHeight - 80) + 'px';
-      	$scope.windowHeight = (window.innerHeight - 220) + 'px';
-      	$scope.fullHeight = (window.innerHeight) + 'px';
+      	////////////////////////////
+      	// Toggle directive control 
+      	////////////////////////////
 
       	// I am the TRUTHY expression to watch.
       	var expression = attrs.gallerypopup;
 
-      	var fbAlbumId = null;
-
-      	
       	// I check to see the default display of the
 		// element based on the link-time value of the
 		// model we are watching.
 		if ( ! $scope.$eval( expression ) ) {
-			element.hide().addClass('slideOutLeft');
+			// ?
 		}
 
-		// I watch the expression in $scope context to
-		// see when it changes - and adjust the visibility
-		// of the element accordingly.
+		// Call the servive to get the data
 		CommonMain.getData().then( function(d) {
-		  // success
-		  //$scope.photos = [];
+		  // if success
 		  if(d){
+		  	// I watch the expression in $scope context to
+			// see when it changes - and adjust the visibility
+			// of the element accordingly.
 		    $scope.$watch(expression,function( newValue, oldValue ) {
-
+		    	
+		    	// Define fbAlbumId based on $scope.fbAlbum in main.js
+		    	// Basically choose which album of picture to open
+		    	// Because is the same directive called in different place
 		      	switch($scope.fbAlbum){
 		      		case 'studio':
 		      			fbAlbumId = $scope.globalInfo.general.fbAlbum;
+		      			$scope.currentSection.isTattooGallery = false;
 		      		break;
 		      		case 'piercing':
 		      			fbAlbumId = $scope.globalInfo.general.piercingFbAlbum;
+		      			$scope.currentSection.isTattooGallery = false;
 		      		break;
 		      		case 'tattoo':
 		      			fbAlbumId = $scope.globalInfo.tattoo[$scope.tattooPosition].fbAlbum;
+		      			$scope.currentSection.isTattooGallery = true;
 		      		break;
 		      		default :
 		      			fbAlbumId = $scope.globalInfo.general.fbAlbum;
+		      			$scope.currentSection.isTattooGallery = false;
 		      		break;
 
 		      		return fbAlbumId;
 		      	}
 
-	      		
+		      	//empty the object with the pictures
+	      		$scope.photos = [];
+
+	      		//Call the FB graph API to get the pictures
 	      		CommonMain.getFBPhotos(fbAlbumId).then( function(d) {
-	      			// success
-	      			$scope.photos = [];
+	      			// if success
 	      			if(d){
 	      				$scope.photosObjGallery = d.data;
 	      				for (var i=0; i<d.data.length; i++){
-	      					var ciao = {
+	      					var pictures = {
 	      						src: d.data[i].images[0].source, 
-	      						thumb:d.data[i].images[d.data[i].images.length -1].source,
-	      						 desc:'boh'
+	      						thumb:d.data[i].images[d.data[i].images.length -1].source
 	      						}
-	      					$scope.photos.push(ciao);
+	      					$scope.photos.push(pictures);
 	      				}
 	      			}
 	    		}, function(d) {
@@ -148,27 +144,34 @@ angular.module('skinandinkApp')
 		    	}
 		    	// Show element.
 		    	if ( newValue ) {
-		    		if ($scope.singleTattooIsVisible || $scope.newsIsVisible){
-		    			var elementToHide = $('div[singletattoo="singleTattooIsVisible"]');
-		    			setTimeout(function(){
-		    				$scope.singleTattooIsVisible = false;
-		    				$scope.newsIsVisible = false;
-		    			},700);
-		    		} else {
-		    			$scope.tattooIsActive = false;
-		    			$scope.newsIsActive = false;
-		    			var elementToHide = $('#h');
-					};
 
-		    		$scope._Index = 0;
+		    		$scope.currentSection.prev = $scope.currentSection.current;
+			        $scope.currentSection.current = element;
+			        
+
+		   			$scope._Index = 0;
+		    		
 		    		var body = $document.find('body').eq(0);
+		    		
 		    		body.animate({scrollTop:0}, '500', 'swing', function() { 
-		    		   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
-		    	     	setTimeout(function(){
-		    	     		elementToHide.hide();
-		    	     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
+		    		   	
+						$scope.controlSlideAnimation.slideOut($scope.currentSection.prev);
+		    		   	
+						setTimeout(function(){
+		    	     		
+		    	     		$scope.controlSlideAnimation.slideIn($scope.currentSection.prev, $scope.currentSection.current);
+		    	     		
 		    	     		setTimeout(function(){
-		    	     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
+		    	     			$scope.backBtn.removeClass('slideOutUp').addClass('slideInDown');
+		    	     			$scope.resetActiveAll();
+		    	     			$scope.galleryIsVisible = true;
+		    	     			if ($scope.ispiercing){
+					              $scope.piercIsActive = true;
+					            }
+		    	     			if ($scope.currentSection.isTattooGallery){
+		    	     				$scope.singleTattooIsVisible = true;
+		    	     				$scope.tattooIsActive = true;
+		    	     			}
 		    	     		},200);	
 		    	     	},600);
 		    		});
