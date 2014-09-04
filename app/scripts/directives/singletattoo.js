@@ -38,7 +38,7 @@ angular.module('skinandinkApp')
 
 		    $scope.loaded = false;
 
-		    CommonMain.getFBInfo($scope.globalInfo.tattoo[$scope.tattooPosition].fbID).then( function(c) {
+		    CommonMain.getFBInfo($scope.globalInfo.tattoo[$scope.tattooPosition].fb_id).then( function(c) {
 			    	  // success
 			    	 
 			    	  	$scope.singleTattoInfoObj = c;
@@ -48,7 +48,7 @@ angular.module('skinandinkApp')
 			    	  $scope.singleTattoinfoObj = {};
 			    	});
 
-			    	CommonMain.getFBPhotos($scope.globalInfo.tattoo[$scope.tattooPosition].fbAlbum).then( function(a) {
+			    	CommonMain.getFBPhotos($scope.globalInfo.tattoo[$scope.tattooPosition].fb_album).then( function(a) {
 			    	    // success
 			    	    if(a){
 			    	    	$scope.singleTattooPhotosObj = a.data;
@@ -66,10 +66,10 @@ angular.module('skinandinkApp')
 
 			$scope.createTattooThumb = function(){
 		    	for (var i = 0 ; i < $scope.globalInfo.tattoo.length; i++){
-		    		var navPos = $scope.globalInfo.tattoo[i].navPosition;
+		    		var navPos = parseInt($scope.globalInfo.tattoo[i].nav_pos);
 		    		var name = $scope.globalInfo.tattoo[i].title;
 		    		//console.log(navPos)
-			    	CommonMain.getFBProfilePic($scope.globalInfo.tattoo[i].fbID, navPos, name).then( function(b) {
+			    	CommonMain.getFBProfilePic($scope.globalInfo.tattoo[i].fb_id, navPos, name).then( function(b) {
 			    	    // success
 			    	    if(b){
 						$scope.tattooProfilePic.push({'url': b.url, 'id': b.navPos, 'name': b.name});

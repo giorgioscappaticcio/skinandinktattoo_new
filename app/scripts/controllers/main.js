@@ -10,7 +10,9 @@
 angular.module('skinandinkApp')
   .controller('MainCtrl', function ($scope, $log, CommonMain, $window) {
     
-  	$scope.homeSection = {
+  	$scope.globalInfo = {};
+
+    $scope.homeSection = {
       name : 'home',
       div : $('#h')
     }
@@ -134,9 +136,28 @@ angular.module('skinandinkApp')
 
   	// I toggle the value of isVisible.
     $scope.toggleGallery = function(album, ispiercing) {
-        $scope.galleryIsVisible = true;
-        $scope.fbAlbum = album;
-        $scope.ispiercing = ispiercing;
+      $scope.galleryIsVisible = true;
+      $scope.fbAlbum = album;
+      $scope.ispiercing = ispiercing;
+
+      switch(album){
+        case 'studio':
+          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
+          $scope.currentSection.isTattooGallery = false;
+        break;
+        case 'piercing':
+          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_piercing_album;
+          $scope.currentSection.isTattooGallery = false;
+        break;
+        case 'tattoo':
+          $scope.fbAlbumId = $scope.globalInfo.tattoo[$scope.tattooPosition].fb_album;
+          $scope.currentSection.isTattooGallery = true;
+        break;
+        default :
+          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
+          $scope.currentSection.isTattooGallery = false;
+        break;
+      }
     };
 
     $scope.toggleTattoo = function() {
@@ -153,12 +174,14 @@ angular.module('skinandinkApp')
 
   	    
 
-    CommonMain.getData().then( function(d) {
+    CommonMain.getGeneralInfo().then( function(d) {
       
       if(d){
         console.log(d);
-        $scope.globalInfo = d;
-        CommonMain.getFBInfo($scope.globalInfo.general.fbID).then( function(c) {
+        $scope.globalInfo.general = d;
+        $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
+        
+        CommonMain.getFBInfo($scope.globalInfo.general[0].fb_id).then( function(c) {
           // success
           
           if(d){
@@ -177,7 +200,7 @@ angular.module('skinandinkApp')
         });
 
         
-        CommonMain.getFBPhotos($scope.globalInfo.general.fbAlbum).then( function(c) {
+        CommonMain.getFBPhotos($scope.globalInfo.general[0].fb_album).then( function(c) {
           // success
           
           if(c){
@@ -193,6 +216,18 @@ angular.module('skinandinkApp')
     }, function(d) {
       // request rejected (error)
       $scope.globalInfo = {};
+    });
+
+    CommonMain.getTattooInfo().then( function(c) {
+      // success
+      
+      if(c){
+        $scope.globalInfo.tattoo = c;
+        console.log(c)
+      }
+    }, function(c) {
+      // request rejected (error)
+      $scope.globalInfo.tattoo = {};
     });
 
   });

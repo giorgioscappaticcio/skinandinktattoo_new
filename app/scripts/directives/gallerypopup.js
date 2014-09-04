@@ -83,60 +83,22 @@ angular.module('skinandinkApp')
 			// ?
 		}
 
-		// Call the servive to get the data
-		CommonMain.getData().then( function(d) {
+		// Call the service to get the data
+		//CommonMain.getData().then( function(d) {
 		  // if success
-		  if(d){
+		  //if(d){
 		  	// I watch the expression in $scope context to
 			// see when it changes - and adjust the visibility
 			// of the element accordingly.
 		    $scope.$watch(expression,function( newValue, oldValue ) {
 		    	
+		    	
 		    	// Define fbAlbumId based on $scope.fbAlbum in main.js
 		    	// Basically choose which album of picture to open
 		    	// Because is the same directive called in different place
-		      	switch($scope.fbAlbum){
-		      		case 'studio':
-		      			fbAlbumId = $scope.globalInfo.general.fbAlbum;
-		      			$scope.currentSection.isTattooGallery = false;
-		      		break;
-		      		case 'piercing':
-		      			fbAlbumId = $scope.globalInfo.general.piercingFbAlbum;
-		      			$scope.currentSection.isTattooGallery = false;
-		      		break;
-		      		case 'tattoo':
-		      			fbAlbumId = $scope.globalInfo.tattoo[$scope.tattooPosition].fbAlbum;
-		      			$scope.currentSection.isTattooGallery = true;
-		      		break;
-		      		default :
-		      			fbAlbumId = $scope.globalInfo.general.fbAlbum;
-		      			$scope.currentSection.isTattooGallery = false;
-		      		break;
-
-		      		return fbAlbumId;
-		      	}
-
-		      	//empty the object with the pictures
-	      		$scope.photos = [];
-
-	      		//Call the FB graph API to get the pictures
-	      		CommonMain.getFBPhotos(fbAlbumId).then( function(d) {
-	      			// if success
-	      			if(d){
-	      				$scope.photosObjGallery = d.data;
-	      				for (var i=0; i<d.data.length; i++){
-	      					var pictures = {
-	      						src: d.data[i].images[0].source, 
-	      						thumb:d.data[i].images[d.data[i].images.length -1].source
-	      						}
-	      					$scope.photos.push(pictures);
-	      				}
-	      			}
-	    		}, function(d) {
-	      			// request rejected (error)
-	      			$scope.photosObjGallery = {};
-	      		});
 		      	
+
+		      			      	
 		      	// Ignore first-run values since we've
 		    	// already defaulted the element state.
 		    	if ( newValue === oldValue ) {
@@ -144,6 +106,28 @@ angular.module('skinandinkApp')
 		    	}
 		    	// Show element.
 		    	if ( newValue ) {
+
+			      	//empty the object with the pictures
+		      		$scope.photos = [];
+
+		      		//Call the FB graph API to get the pictures
+		      		CommonMain.getFBPhotos($scope.fbAlbumId).then( function(d) {
+		      			// if success
+		      			if(d){
+		      				$scope.photosObjGallery = d.data;
+		      				for (var i=0; i<d.data.length; i++){
+		      					var pictures = {
+		      						src: d.data[i].images[0].source, 
+		      						thumb:d.data[i].images[d.data[i].images.length -1].source
+		      						}
+		      					$scope.photos.push(pictures);
+		      				}
+		      			}
+		    		}, function(d) {
+		      			// request rejected (error)
+		      			$scope.photosObjGallery = {};
+		      		});
+
 
 		    		$scope.currentSection.prev = $scope.currentSection.current;
 			        $scope.currentSection.current = element;
@@ -192,11 +176,11 @@ angular.module('skinandinkApp')
 		    		} 
 		    	}
 		    });
-		  }
-		}, function(d) {
+		  //}
+		//}, function(d) {
 		  // request rejected (error)
 		  //$scope.globalInfo = {};
-		});
+		//});
 
 	   }
     };

@@ -10,12 +10,51 @@
 angular.module('skinandinkApp')
   .service('CommonMain', function CommonMain($http, $q) {
     
+    // Change this variable according to the environment
+  	var callsUrl = 'http://giorgioscappaticcio.co.uk/skin_ink/admin/queries/';
+  	var GET_GENERAL_INFO = 'get_general_info.php';
+  	var GET_TATTOO_INFO = 'get_tattoo_info.php';
+
   	this.getData = function() {
 
   	  
   	  var d = $q.defer();
 
   	  $http({method: 'GET', url: 'data/data.json'}).
+	    success(function(data, status, headers, config) {
+	    	var superData = data
+	    	return d.resolve(superData)
+	    }).
+	    error(function(data, status, headers, config) {
+	      return d.reject('you got a problem');
+	    });
+		
+		return d.promise;
+  	};
+
+  	this.getGeneralInfo = function() {
+
+  	  
+  	  var d = $q.defer();
+
+  	  $http({method: 'GET', url: callsUrl + GET_GENERAL_INFO}).
+	    success(function(data, status, headers, config) {
+	    	var superData = data
+	    	return d.resolve(superData)
+	    }).
+	    error(function(data, status, headers, config) {
+	      return d.reject('you got a problem');
+	    });
+		
+		return d.promise;
+  	};
+
+  	this.getTattooInfo = function() {
+
+  	  
+  	  var d = $q.defer();
+
+  	  $http({method: 'GET', url: callsUrl + GET_TATTOO_INFO}).
 	    success(function(data, status, headers, config) {
 	    	var superData = data
 	    	return d.resolve(superData)
