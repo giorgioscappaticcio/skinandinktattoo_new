@@ -61,6 +61,8 @@ form span.success {
   font-size: 20px;
   font-weight: 400;
   text-align: center;
+  cursor: pointer;
+  z-index: 9;
 }
 .back_home:hover i {
   	-webkit-animation: rotate 0.3s; /* Chrome, Safari, Opera */
@@ -69,11 +71,24 @@ form span.success {
     animation-fill-mode: forwards;
 }
 
+.flex-container {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+}
+
 #news ul li {
   width: 46%;
   display: inline-block;
   margin-left: 1%;
+  background-color: #1A1A1B;
+  margin-bottom: 4%;
+  position: relative;
+  
 }
+
+
+
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes rotate {
@@ -121,11 +136,6 @@ form span.success {
 .circle_thumb,
 .thumb{
 	cursor: pointer;
-}
-
-.back_home {
-	cursor: pointer;
-	z-index: 9;
 }
 
 /* SLIDER ANIMATION */

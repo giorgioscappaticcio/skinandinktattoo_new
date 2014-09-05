@@ -13,7 +13,7 @@
       <div class="arrow left" id="left_arrow" ng-click="prevTattoo()">&lt;</div>
       <!-- <div class="arrow left" id="left_arrow" ng-click="prevTattoo()" ng-hide="tattooPosition == 0">&lt;</div> -->
       <div class="w-container icon_nav">
-      	<div class="circle_thumb" ng-repeat="profilePicUrl in tattooProfilePic | orderBy:'id'" ng-click="goToTattoo(profilePicUrl.id - 1)" ng-class="{'selected': tattooPosition == $index}">
+      	<div class="circle_thumb" ng-repeat="profilePicUrl in tattooProfilePic | orderBy:'id'" ng-click="goToTattoo($index)" ng-class="{'selected': tattooPosition == $index}">
       		<img src="{{profilePicUrl.url}}"/>
       	</div>
       </div>

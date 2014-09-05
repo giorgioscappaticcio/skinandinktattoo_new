@@ -12,8 +12,12 @@ angular.module('skinandinkApp')
     
     // Change this variable according to the environment
   	var callsUrl = 'http://giorgioscappaticcio.co.uk/skin_ink/admin/queries/';
+  	
   	var GET_GENERAL_INFO = 'get_general_info.php';
   	var GET_TATTOO_INFO = 'get_tattoo_info.php';
+
+  	var GET_NEWS = 'get_news_published.php'
+
 
   	this.getData = function() {
 
@@ -117,6 +121,23 @@ angular.module('skinandinkApp')
 
 		return d.promise;
 	};
+
+	this.getNews = function() {
+
+  	  
+  	  var d = $q.defer();
+
+  	  $http({method: 'GET', url: callsUrl + GET_NEWS}).
+	    success(function(data, status, headers, config) {
+	    	var superData = data
+	    	return d.resolve(superData)
+	    }).
+	    error(function(data, status, headers, config) {
+	      return d.reject('you got a problem');
+	    });
+		
+		return d.promise;
+  	};
 
 	
 	this.sendEmail = function(params){

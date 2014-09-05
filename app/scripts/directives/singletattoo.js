@@ -13,6 +13,7 @@ angular.module('skinandinkApp')
 		restrict: 'AE',
 		link: function link($scope, element, attrs, $log) {
 
+			$scope.backBtn = $('.back_home');
 			$scope.tattooPosition = 0;
 
 			$scope.generalInfoLoaded = false;

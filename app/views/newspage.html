@@ -2,63 +2,31 @@
   
     <div class="section no-header" id="news">
       <div class="w-container">
-      	<ul>
-      		<li>
+      	<ul class="flex-container">
+      		<li ng-repeat="news in newsObj">
       			<div class="single-news-thumb-cont">
 	              <div class="single-news-thumb-head">
-	                <h3 class="single-news-thumb-h3">News Title</h3>
-	                <div class="expand_news">+</div>
+	                <h3 class="single-news-thumb-h3" ng-bind="news.title"></h3>
+	                
 	              </div>
-	              <div class="thumb-wrap">
-	                <img src="images/intern_3.jpg" alt="5400e3c60a902ac916a6c813_intern_3.jpg">
+	              <div class="thumb-wrap video-thumb" ng-show="news.youtube_video != 'null' && news.youtube_video != ''">
+      			    <div youtubevideo codeUrl="{{news.youtube_video}}" ng-show="news.youtube_video != 'null'"></div>
+      			  </div>
+	              <div class="thumb-wrap" ng-hide="news.youtube_video != 'null' && news.youtube_video != ''">
+	                <img src="{{news.picture}}" alt="">
 	              </div>
-	              <p class="single-news-thumb-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo
-	                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.&nbsp;</p>
-	            </div>
+	              <p class="single-news-thumb-p" ng-bind-html="news.content | cut:true:360:' ...'" ng-hide="$index==selectedNews"></p>
+	              <p class="single-news-thumb-p" ng-bind-html="news.content" ng-show="$index==selectedNews"></p>
+				</div>
+	            <div class="expand_news" ng-click="expandNews($index)" ng-hide="$index==selectedNews"><i class="fa fa-plus-square"></i></div>
+	            <div class="expand_news" ng-click="resetNewsIndex();" ng-show="$index==selectedNews"><i class="fa fa-minus-square"></i></div>
             </li>
-      		<li>
-      			<div class="single-news-thumb-cont">
-      			  <div class="single-news-thumb-head">
-      			    <h3 class="single-news-thumb-h3">Interview with Odge</h3>
-      			    <div class="expand_news">+</div>
-      			  </div>
-      			  <div class="thumb-wrap video-thumb">
-      			    <div youtubevideo codeUrl="https://www.youtube.com/watch?v=UL2YkgWdh2k"></div>
-      			  </div>
-      			  <p class="single-news-thumb-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo
-      			    cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus&nbsp;tristique posuere.</p>
-      			</div>
-      		</li>
-      		<li>
-      			<div class="single-news-thumb-cont">
-	              <div class="single-news-thumb-head">
-	                <h3 class="single-news-thumb-h3">News Title</h3>
-	                <div class="expand_news">+</div>
-	              </div>
-	              <div class="thumb-wrap">
-	                <img src="images/intern_3.jpg" alt="5400e3c60a902ac916a6c813_intern_3.jpg">
-	              </div>
-	              <p class="single-news-thumb-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo
-	                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.&nbsp;</p>
-	            </div>
-      		</li>
-      		<li>
-      			<div class="single-news-thumb-cont">
-	              <div class="single-news-thumb-head">
-	                <h3 class="single-news-thumb-h3">News Title</h3>
-	                <div class="expand_news">+</div>
-	              </div>
-	              <div class="thumb-wrap">
-	                <img src="images/intern_3.jpg" alt="5400e3c60a902ac916a6c813_intern_3.jpg">
-	              </div>
-	              <p class="single-news-thumb-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo
-	                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.&nbsp;</p>
-	            </div>
-      		</li>
-      	</ul>
+		</ul>
       </div>
     </div>
 
 
 </div>
-<div class="back_home animated slideOutUp" ng-click="closeBtn()"><i class="fa fa-times"></i></div>
+<div class="back_home animated slideOutUp" ng-click="closePanel()"><i class="fa fa-times"></i></div>
+
+

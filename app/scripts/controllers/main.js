@@ -36,41 +36,8 @@ angular.module('skinandinkApp')
     $scope.currentSection = {
       current : $scope.homeSection.div,
       prev : null,
-      isTattooGallery : false
-    }
-    ////////////////////////////
-    // Reset control
-    ////////////////////////////
-
-    $scope.resetActiveLink = function(){
-      $scope.piercIsActive = false;
-      $scope.tattooIsActive = false;
-      $scope.newsIsActive = false;
-      $scope.bookNowIsActive = false;
-    }
-
-    $scope.resetActiveSection = function(){
-        // Default the blocks to be visible.
-        $scope.galleryIsVisible = false;
-        $scope.singleTattooIsVisible = false;
-        $scope.newsIsVisible = false;
-        $scope.bookNowIsVisible = false;
-        $scope.ispiercing = false;
-    }
-
-    $scope.resetActiveAll = function(){
-      $scope.resetActiveLink();
-      $scope.resetActiveSection();
-    }
-
-    $scope.closePanel = function(){
-      $scope.currentSection.prev = $scope.currentSection.current;
-      $scope.currentSection.current = $scope.homeSection;
-        
-      $scope.backBtn.removeClass('slideInDown').addClass('slideOutUp');
-        
-      $scope.controlSlideAnimation.totalOut($scope.currentSection.prev, $scope.currentSection.current);
-      $scope.resetActiveAll(); 
+      isTattooGallery : false,
+      isGallery : false
     }
 
     ////////////////////////////
@@ -91,9 +58,94 @@ angular.module('skinandinkApp')
     $scope.fullHeight = (window.innerHeight) + 'px';
 
 
+    ////////////////////////////
+    // Reset control
+    ////////////////////////////
+
+    $scope.resetActiveLink = function(){
+      $scope.piercIsActive = false;
+      $scope.tattooIsActive = false;
+      $scope.newsIsActive = false;
+      $scope.bookNowIsActive = false;
+    }
+
+    $scope.resetActiveSection = function(){
+        // Default the blocks to be visible.
+        $scope.galleryIsVisible = false;
+        $scope.singleTattooIsVisible = false;
+        $scope.newsIsVisible = false;
+        $scope.bookNowIsVisible = false;
+        $scope.ispiercing = false;
+        $scope.currentSection.isGallery = false;
+    }
+
+    $scope.resetActiveAll = function(){
+      $scope.resetActiveLink();
+      $scope.resetActiveSection();
+      $scope.galleryLoaded = true;
+      $scope.mainLoaded = true;
+    }
+
+    $scope.closePanel = function(){
+      $scope.currentSection.prev = $scope.currentSection.current;
+      $scope.currentSection.current = $scope.homeSection;
+        
+      $scope.backBtn.removeClass('slideInDown').addClass('slideOutUp');
+        
+      $scope.controlSlideAnimation.totalOut($scope.currentSection.prev, $scope.currentSection.current);
+      $scope.resetActiveAll(); 
+    }
+
+    
+
+    ////////////////////////////
+    // Toggle control
+    ////////////////////////////
+
+    $scope.toggleGallery = function(album, ispiercing) {
+      if ($scope.galleryIsVisible){
+        $scope.currentSection.isGallery = true;
+      }
+      $scope.galleryIsVisible = true;
+      $scope.fbAlbum = album;
+      $scope.ispiercing = ispiercing;
+
+      switch(album){
+        case 'studio':
+          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
+          $scope.currentSection.isTattooGallery = false;
+        break;
+        case 'piercing':
+          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_piercing_album;
+          $scope.currentSection.isTattooGallery = false;
+        break;
+        case 'tattoo':
+          $scope.fbAlbumId = $scope.globalInfo.tattoo[$scope.tattooPosition].fb_album;
+          $scope.currentSection.isTattooGallery = true;
+        break;
+        default :
+          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
+          $scope.currentSection.isTattooGallery = false;
+        break;
+      }
+    };
+
+    $scope.toggleTattoo = function() {
+      $scope.singleTattooIsVisible = true;
+    };
+
+    $scope.toggleNews = function() {
+      $scope.newsIsVisible = true;
+    };
+
+    $scope.toggleBookNow = function() {
+      $scope.bookNowIsVisible = true;
+    };
 
     //Init
     $scope.resetActiveAll();
+    $scope.galleryLoaded = false;
+    $scope.mainLoaded = false;
 
     $scope.controlSlideAnimation = {
       slideOut : function(prevSection){
@@ -134,43 +186,7 @@ angular.module('skinandinkApp')
 	  }
 	  	
 
-  	// I toggle the value of isVisible.
-    $scope.toggleGallery = function(album, ispiercing) {
-      $scope.galleryIsVisible = true;
-      $scope.fbAlbum = album;
-      $scope.ispiercing = ispiercing;
-
-      switch(album){
-        case 'studio':
-          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
-          $scope.currentSection.isTattooGallery = false;
-        break;
-        case 'piercing':
-          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_piercing_album;
-          $scope.currentSection.isTattooGallery = false;
-        break;
-        case 'tattoo':
-          $scope.fbAlbumId = $scope.globalInfo.tattoo[$scope.tattooPosition].fb_album;
-          $scope.currentSection.isTattooGallery = true;
-        break;
-        default :
-          $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
-          $scope.currentSection.isTattooGallery = false;
-        break;
-      }
-    };
-
-    $scope.toggleTattoo = function() {
-      $scope.singleTattooIsVisible = true;
-    };
-
-    $scope.toggleNews = function() {
-      $scope.newsIsVisible = true;
-    };
-
-    $scope.toggleBookNow = function() {
-      $scope.bookNowIsVisible = true;
-    };
+  	
 
   	    
 
@@ -206,7 +222,7 @@ angular.module('skinandinkApp')
           if(c){
             $scope.photosObj = c.data;
             $log.debug('photos', $scope.photosObj);
-          
+            $scope.mainLoaded = true;
           }
         }, function(c) {
           // request rejected (error)

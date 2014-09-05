@@ -7,13 +7,15 @@
  * # booknow
  */
 angular.module('skinandinkApp')
-  .directive('booknow', function ($templateCache, $document, $compile, $log, CommonMain, $window, $location) {
+  .directive('booknow', function ($templateCache, $document, $compile, $log, CommonMain, $window, $location, $timeout) {
     return {
       templateUrl: 'views/booknow.html',
       restrict: 'AE',
       link: function postLink($scope, element, attrs, $log) {
 
-      	$scope.tattooArtistsName = [];
+      	$scope.backBtn = $('.back_home');
+
+            $scope.tattooArtistsName = [];
 
       	$scope.emailForm = {};
 
@@ -41,7 +43,7 @@ angular.module('skinandinkApp')
       	  		      $timeout(function(){
       	  		      	$scope.showFormConfirm = false;
       	  		      	$scope.showFormError = false;
-      	  		      }, 2000);
+      	  		      }, 6000);
       	  		    } else{
       	  		    	$scope.showFormError = true;
       	  		    	$scope.showFormConfirm = false;
@@ -49,7 +51,7 @@ angular.module('skinandinkApp')
       	  		        $timeout(function(){
       	  		        	$scope.showFormConfirm = false;
       	  		        	$scope.showFormError = false;
-      	  		        }, 2000);
+      	  		        }, 6000);
       	  		    }
       	  		    
       	  		  }
@@ -105,13 +107,13 @@ angular.module('skinandinkApp')
 			     		$scope.controlSlideAnimation.slideIn($scope.currentSection.prev, $scope.currentSection.current);
 			     		
 			     		setTimeout(function(){
-			     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
+			     			$scope.backBtn.removeClass('slideOutUp').addClass('slideInDown');
 			     			$scope.resetActiveAll();
-		    	     		$scope.bookNowIsVisible = true;
-		    	     		$scope.bookNowIsActive = true;
+		    	     		    $scope.bookNowIsVisible = true;
+		    	     		    $scope.bookNowIsActive = true;
 			     		},200);
-					},600);
-				});
+				},600);
+			});
 			// Hide element.
 			} else {
 				return;

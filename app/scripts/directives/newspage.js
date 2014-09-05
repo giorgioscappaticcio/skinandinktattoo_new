@@ -20,7 +20,16 @@ angular.module('skinandinkApp')
 		// 	isgallery : false
 		// }
 
-		
+		$scope.expand = false;
+
+		$scope.expandNews = function(indice) {
+			$scope.selectedNews = indice;
+			$scope.expand = !$scope.expand;
+		}
+
+		$scope.resetNewsIndex = function(){
+			$scope.selectedNews = null;
+		}
 
       	var expression = attrs.newspage;
 
@@ -40,6 +49,8 @@ angular.module('skinandinkApp')
 			// Show element.
 			if ( newValue ) {
 
+
+
 				$scope.currentSection = {
 		          prev : $scope.currentSection.current,
 		          current : element
@@ -48,6 +59,17 @@ angular.module('skinandinkApp')
 				var body = $document.find('body').eq(0);
 
 				body.animate({scrollTop:0}, '500', 'swing', function() { 
+
+					CommonMain.getNews().then( function(c) {
+						// success
+						if(c){
+							$scope.newsObj = c;
+							console.log(c)
+						}
+				    }, function(c) {
+				      // request rejected (error)
+				      $scope.newsObj = {};
+				    });
 				   	
 				   	$scope.controlSlideAnimation.slideOut($scope.currentSection.prev);
 			     	

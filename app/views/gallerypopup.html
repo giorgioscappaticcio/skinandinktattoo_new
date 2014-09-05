@@ -1,3 +1,12 @@
+<!-- Thumb pictures -->
+<div class="w-row leftside">
+	<!-- extra navigation controls -->
+	<ul class="slideNav">
+	    <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
+	        <img src="{{photo.thumb}}" alt="{{photo.desc}}" title="{{photo.desc}}" ng-click="showPhoto($index);" />
+	    </li>
+	</ul>
+</div>
 <!-- slider container -->
 <div class="w-container">
 	<div class="w-row">
@@ -10,13 +19,16 @@
 			<a class="arrowNav next" href="" ng-click="showNext()"><i class="fa fa-caret-right"></i></a>
 		</div>
 	</div>
-	<div class="w-row">
-    	<!-- extra navigation controls -->
-    	<ul class="slideNav">
-    	    <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
-    	        <img src="{{photo.thumb}}" alt="{{photo.desc}}" title="{{photo.desc}}" ng-click="showPhoto($index);" />
-    	    </li>
-    	</ul>
-    </div>
+	<div class="separator_50"></div>
 </div>
+
+<!-- Back button -->
 <div class="back_home animated slideOutUp" ng-click="closeBtn()"><i class="fa fa-times"></i></div>
+
+<!-- Loader -->
+ <div class="bigLoader" ng-hide="galleryLoaded" ng-style="fullBgCover">
+  <div class="loaderCenter">
+    <i class="fa fa-cog"></i>
+  </div>
+</div>
+
