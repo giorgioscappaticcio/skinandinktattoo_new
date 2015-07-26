@@ -1,11 +1,11 @@
 
 <div id="s" class="">
-  
+
     <div class="single_header" id="single_header">
       <div class="back_home animated" ng-click="closePanel()"><i class="fa fa-times"></i></div>
       <div class="w-container fb_header" >
         <div class="loaderCont" ng-hide="loaded"><i class="fa fa-cog"></i></div>
-        <img class="fb_header_img" id="fbCoverImg" src="{{singleTattoInfoObj.cover.source}}" ng-style="coverStyle" ng-show="loaded">
+        <img class="fb_header_img" id="fbCoverImg" ng-src="{{singleTattoInfoObj.cover.source}}" ng-style="coverStyle" ng-show="loaded">
       </div>
     </div>
 
@@ -31,7 +31,7 @@
           <div class="w-col w-col-7 right_col">
             <h3 class="gallery_title">Gallery:</h3>
             <div id="photoContainer">
-            	<div ng-repeat="picture in singleTattooPhotosObj | limitTo : thumbLimit" class="big_thumb" style="background-image:url({{picture.images[picture.images.length-1].source}})" ng-click="toggleGallery(tattooSection.name)">
+            	<div ng-repeat="picture in singleTattooPhotosObj | limitTo : thumbLimit" class="big_thumb" style="background-image:url({{picture.source}})" ng-click="toggleGallery(tattooSection.name)">
             	</div>
             </div>
           </div>

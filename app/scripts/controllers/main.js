@@ -8,8 +8,8 @@
  * Controller of the skinandinkApp
  */
 angular.module('skinandinkApp')
-  .controller('MainCtrl', function ($scope, $log, CommonMain, $window) {
-    
+  .controller('MainCtrl', function ($scope, $log, CommonMain, $window, $rootScope) {
+
   	$scope.globalInfo = {};
 
     $scope.homeSection = {
@@ -49,7 +49,7 @@ angular.module('skinandinkApp')
     $scope.artistsSection = $('div[singletattoo="singleTattooIsVisible"]');
     $scope.newsSection = $('div[newspage="newsIsVisible"]');
 
-    
+
     ////////////////////////////
     //Window size control
     ////////////////////////////
@@ -89,14 +89,14 @@ angular.module('skinandinkApp')
     $scope.closePanel = function(){
       $scope.currentSection.prev = $scope.currentSection.current;
       $scope.currentSection.current = $scope.homeSection;
-        
+
       $scope.backBtn.removeClass('slideInDown').addClass('slideOutUp');
-        
+
       $scope.controlSlideAnimation.totalOut($scope.currentSection.prev, $scope.currentSection.current);
-      $scope.resetActiveAll(); 
+      $scope.resetActiveAll();
     }
 
-    
+
 
     ////////////////////////////
     // Toggle control
@@ -151,7 +151,7 @@ angular.module('skinandinkApp')
       slideOut : function(prevSection){
         prevSection.removeClass('slideInLeft').addClass('slideOutLeft');
       },
-      
+
       slideIn : function(prevSection, nextSection){
         prevSection.hide();
         nextSection.show().removeClass('slideOutLeft').addClass('slideInLeft');
@@ -163,7 +163,7 @@ angular.module('skinandinkApp')
           setTimeout(function(){
               $scope.controlSlideAnimation.slideIn(prevSection, nextSection);
           },600);
-        },200); 
+        },200);
       }
     }
 
@@ -171,7 +171,7 @@ angular.module('skinandinkApp')
   		latitude: 0,
   		longitude: 0
   	};
-  	  	
+
   	$scope.map = {
   		center: $scope.center,
   		zoom: 15,
@@ -184,49 +184,56 @@ angular.module('skinandinkApp')
 	    'width' : '100%',//$window.innerWidth + 'px',
 	    'height' : '100%'//$window.innerHeight + 'px'
 	  }
-	  	
 
-  	
 
-  	    
+
+
+
 
     CommonMain.getGeneralInfo().then( function(d) {
-      
+
       if(d){
         console.log(d);
         $scope.globalInfo.general = d;
         $scope.fbAlbumId = $scope.globalInfo.general[0].fb_album;
-        
-        CommonMain.getFBInfo($scope.globalInfo.general[0].fb_id).then( function(c) {
-          // success
-          
-          if(d){
-            $scope.infoObj = c;
-            $log.debug('center', $scope.infoObj);
-            $scope.center = {
-              latitude: c.location.latitude,
-              longitude: c.location.longitude
-            }
-            $log.debug('center', $scope.center);
-            $scope.map.control.refresh($scope.center);
-          }
-        }, function(c) {
-          // request rejected (error)
-          $scope.infoObj = {};
-        });
 
-        
-        CommonMain.getFBPhotos($scope.globalInfo.general[0].fb_album).then( function(c) {
-          // success
-          
-          if(c){
-            $scope.photosObj = c.data;
-            $log.debug('photos', $scope.photosObj);
-            $scope.mainLoaded = true;
+        CommonMain.getToken().then(function(response){
+          if (response) {
+            $scope.token = response;
+            $rootScope.token = response;
+
+            CommonMain.getFBInfo($scope.globalInfo.general[0].fb_id, $scope.token).then( function(c) {
+              // success
+
+              if(d){
+                $scope.infoObj = c;
+                $log.debug('center', $scope.infoObj);
+                $scope.center = {
+                  latitude: c.location.latitude,
+                  longitude: c.location.longitude
+                }
+                $log.debug('center', $scope.center);
+                $scope.map.control.refresh($scope.center);
+              }
+            }, function(c) {
+              // request rejected (error)
+              $scope.infoObj = {};
+            });
+
+            CommonMain.getFBPhotos($scope.globalInfo.general[0].fb_album, $scope.token).then( function(c) {
+              // success
+
+              if(c){
+                $scope.photosObj = c.data;
+                $log.debug('photos', $scope.photosObj);
+                $scope.mainLoaded = true;
+              }
+            }, function(c) {
+              // request rejected (error)
+              $scope.photosObj = {};
+            });
+
           }
-        }, function(c) {
-          // request rejected (error)
-          $scope.photosObj = {};
         });
       }
     }, function(d) {
@@ -236,7 +243,7 @@ angular.module('skinandinkApp')
 
     CommonMain.getTattooInfo().then( function(c) {
       // success
-      
+
       if(c){
         $scope.globalInfo.tattoo = c;
         console.log(c)
@@ -249,4 +256,4 @@ angular.module('skinandinkApp')
   });
 
 
- 
+

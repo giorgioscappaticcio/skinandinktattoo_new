@@ -291,7 +291,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // ngtemplates 
+    // ngtemplates
     ngtemplates:  {
        app:        {
         src:      ['./**/views/**.html', './**/views/**/**.html'],
@@ -341,9 +341,9 @@ module.exports = function (grunt) {
             'fonts/*'
           ]
         }, {
-          expand: true, 
-          cwd: 'bower_components/fontawesome/fonts/', 
-          src: ['**'], 
+          expand: true,
+          cwd: 'bower_components/fontawesome/fonts/',
+          src: ['**'],
           dest: '<%= yeoman.dist %>/fonts/'
         }, {
           expand: true,
@@ -392,7 +392,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      //'wiredep',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -415,7 +415,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
+    //'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

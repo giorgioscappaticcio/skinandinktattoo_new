@@ -84,7 +84,7 @@ form span.success {
   background-color: #1A1A1B;
   margin-bottom: 4%;
   position: relative;
-  
+
 }
 
 
@@ -126,6 +126,8 @@ form span.success {
 }
 .thumb{
 	border: 1px solid;
+  background-size: cover;
+  background-position: center;
 }
 .thumb:hover,
 .big_thumb:hover{

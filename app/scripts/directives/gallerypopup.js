@@ -7,14 +7,14 @@
  * # gallerypopup
  */
 angular.module('skinandinkApp')
-  .directive('gallerypopup', function ($templateCache, $document, $compile, $log, CommonMain, $window, $location) {
+  .directive('gallerypopup', function ($templateCache, $document, $compile, $log, CommonMain, $window, $location, $rootScope) {
     return {
       templateUrl: 'views/gallerypopup.html',
       restrict: 'AE',
       link: function link($scope, element, attrs, $log) {
-      
+
       	////////////////////////////
-      	// Initial variable control 
+      	// Initial variable control
       	////////////////////////////
       	var fbAlbumId = null;
 
@@ -48,13 +48,13 @@ angular.module('skinandinkApp')
       	};
 
       	////////////////////////////
-      	// Close Button control 
+      	// Close Button control
       	////////////////////////////
 
       	$scope.closeBtn = function(){
-      		
+
       		$scope.resetActiveAll();
-            
+
             if ($scope.currentSection.isTattooGallery){
 	        	$scope.singleTattooIsVisible = true;
 	        	$scope.tattooIsActive = true;
@@ -70,7 +70,7 @@ angular.module('skinandinkApp')
       	}
 
       	////////////////////////////
-      	// Toggle directive control 
+      	// Toggle directive control
       	////////////////////////////
 
       	// I am the TRUTHY expression to watch.
@@ -85,16 +85,16 @@ angular.module('skinandinkApp')
 			// ?
 		}
 
-		
+
 	    $scope.$watch(expression,function( newValue, oldValue) {
-	    	
-	    	
+
+
 	    	// Define fbAlbumId based on $scope.fbAlbum in main.js
 	    	// Basically choose which album of picture to open
 	    	// Because is the same directive called in different place
-	      	
 
-	      			      	
+
+
 	      	// Ignore first-run values since we've
 	    	// already defaulted the element state.
 	    	if ( newValue === oldValue ) {
@@ -107,14 +107,14 @@ angular.module('skinandinkApp')
 	      		$scope.photos = [];
 
 	      		//Call the FB graph API to get the pictures
-	      		CommonMain.getFBPhotos($scope.fbAlbumId).then( function(d) {
+	      		CommonMain.getFBPhotos($scope.fbAlbumId, $rootScope.token).then( function(d) {
 	      			// if success
 	      			if(d){
 	      				$scope.photosObjGallery = d.data;
-	      				for (var i=0; i<d.data.length; i++){
+	      				for (var i=0; i< d.data.length; i++){
 	      					var pictures = {
-	      						src: d.data[i].images[0].source, 
-	      						thumb:d.data[i].images[d.data[i].images.length -1].source
+	      						src: d.data[i].source,
+	      						thumb: d.data[i].source
 	      						}
 	      					$scope.photos.push(pictures);
 	      				}
@@ -127,20 +127,20 @@ angular.module('skinandinkApp')
 
 	    		$scope.currentSection.prev = $scope.currentSection.current;
 		        $scope.currentSection.current = element;
-		        
+
 
 	   			$scope._Index = 0;
-	    		
+
 	    		var body = $document.find('body').eq(0);
-	    		
-	    		body.animate({scrollTop:0}, '500', 'swing', function() { 
-	    		   	
+
+	    		body.animate({scrollTop:0}, '500', 'swing', function() {
+
 					$scope.controlSlideAnimation.slideOut($scope.currentSection.prev);
-	    		   	
+
 					setTimeout(function(){
-	    	     		
+
 	    	     		$scope.controlSlideAnimation.slideIn($scope.currentSection.prev, $scope.currentSection.current);
-	    	     		
+
 	    	     		setTimeout(function(){
 	    	     			$scope.backBtn.removeClass('slideOutUp').addClass('slideInDown');
 	    	     			if ($scope.ispiercing){
@@ -153,7 +153,7 @@ angular.module('skinandinkApp')
 	    	     				$scope.singleTattooIsVisible = true;
 	    	     				$scope.tattooIsActive = true;
 	    	     			}
-	    	     		},200);	
+	    	     		},200);
 	    	     		$scope.galleryLoaded = true;
 	    	     	},600);
 	    		});
@@ -163,7 +163,7 @@ angular.module('skinandinkApp')
 	    });
 
 		$scope.$watch('currentSection.isGallery',function( newValue, oldValue) {
-	    	
+
 	    	// Ignore first-run values since we've
 	    	// already defaulted the element state.
 	    	if ( newValue === oldValue ) {
@@ -176,13 +176,13 @@ angular.module('skinandinkApp')
 	      		$scope.photos = [];
 
 	      		//Call the FB graph API to get the pictures
-	      		CommonMain.getFBPhotos($scope.fbAlbumId).then( function(d) {
+	      		CommonMain.getFBPhotos($scope.fbAlbumId, $rootScope.token).then( function(d) {
 	      			// if success
 	      			if(d){
 	      				$scope.photosObjGallery = d.data;
 	      				for (var i=0; i<d.data.length; i++){
 	      					var pictures = {
-	      						src: d.data[i].images[0].source, 
+	      						src: d.data[i].images[0].source,
 	      						thumb:d.data[i].images[d.data[i].images.length -1].source
 	      						}
 	      					$scope.photos.push(pictures);
@@ -199,7 +199,7 @@ angular.module('skinandinkApp')
 	      		});
 
 				$scope._Index = 0;
-	    		
+
 	    	} else {}
 	    });
 

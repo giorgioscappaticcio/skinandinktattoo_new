@@ -7,7 +7,7 @@
  * # singletattoo
  */
 angular.module('skinandinkApp')
-  .directive('singletattoo', function ($templateCache, $document, $compile, $log, CommonMain, $window, $location) {
+  .directive('singletattoo', function ($templateCache, $document, $compile, $log, CommonMain, $window, $location, $rootScope) {
     return {
 		templateUrl: 'views/singletattoo.html',
 		restrict: 'AE',
@@ -39,17 +39,17 @@ angular.module('skinandinkApp')
 
 		    $scope.loaded = false;
 
-		    CommonMain.getFBInfo($scope.globalInfo.tattoo[$scope.tattooPosition].fb_id).then( function(c) {
+		    CommonMain.getFBInfo($scope.globalInfo.tattoo[$scope.tattooPosition].fb_id, $rootScope.token).then( function(c) {
 			    	  // success
-			    	 
+
 			    	  	$scope.singleTattoInfoObj = c;
-			    	
+
 			    	}, function(c) {
 			    	  // request rejected (error)
 			    	  $scope.singleTattoinfoObj = {};
 			    	});
 
-			    	CommonMain.getFBPhotos($scope.globalInfo.tattoo[$scope.tattooPosition].fb_album).then( function(a) {
+			    	CommonMain.getFBPhotos($scope.globalInfo.tattoo[$scope.tattooPosition].fb_album, $rootScope.token).then( function(a) {
 			    	    // success
 			    	    if(a){
 			    	    	$scope.singleTattooPhotosObj = a.data;
@@ -74,7 +74,7 @@ angular.module('skinandinkApp')
 			    	    // success
 			    	    if(b){
 						$scope.tattooProfilePic.push({'url': b.url, 'id': b.navPos, 'name': b.name});
-		                
+
 			    	    	//console.log(b.navPos);
 			    	    }
 			    	}, function(b) {
@@ -83,7 +83,7 @@ angular.module('skinandinkApp')
 			    	});
 			}
 		}
-			
+
 			$scope.$watch('tattooPosition',function(oldValue, newValue){
 
 				if (!$scope.generalInfoLoaded){
@@ -111,27 +111,27 @@ angular.module('skinandinkApp')
 		        }
 		    }
 		}
-			   
-			    
-		    	
-			 	
-		    	
-		    	
-			 
-			
 
 
 
-			    
 
-			    
-			    
+
+
+
+
+
+
+
+
+
+
+
 
 
 			// I am the TRUTHY expression to watch.
 			var expression = attrs.singletattoo;
 
-			
+
 			// I check to see the default display of the
 		// element based on the link-time value of the
 		// model we are watching.
@@ -144,7 +144,7 @@ angular.module('skinandinkApp')
 		// of the element accordingly.
 		$scope.$watch(expression,function( newValue, oldValue ) {
 
-		  	
+
 			// Ignore first-run values since we've
 			// already defaulted the element state.
 			if ( newValue === oldValue ) {
@@ -163,7 +163,7 @@ angular.module('skinandinkApp')
 				$scope.tattooProfilePic = [];
 				// reset tattoo position
 				$scope.tattooPosition = 0;
-		        
+
 
 				$scope.generalInfoLoaded = true;
 				$scope.createTattooThumb();
@@ -182,7 +182,7 @@ angular.module('skinandinkApp')
 		        	var elementToHide = $('#h');
 		        }
 				var body = $document.find('body').eq(0);
-				body.animate({scrollTop:0}, '500', 'swing', function() { 
+				body.animate({scrollTop:0}, '500', 'swing', function() {
 				   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
 			     	setTimeout(function(){
 			     		$scope.resetActiveLink();
@@ -200,7 +200,7 @@ angular.module('skinandinkApp')
 			} else {
 				return;
 				//element.hide();
-				 
+
 			}
 		});
 		}

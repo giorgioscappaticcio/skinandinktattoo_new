@@ -372,7 +372,7 @@ p {
   background-color: black;
   background-image: url('../images/example-bg.png');
   background-position: 50% 50%;
-  background-size: 125px;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: scroll;
 }

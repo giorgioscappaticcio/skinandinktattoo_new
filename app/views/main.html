@@ -28,7 +28,7 @@
             <h3>Gallery:</h3>
             <div class="w-row gallery_thumb_left_col">
               <div class="w-col w-col-3" ng-repeat="photo in photosObj | limitTo: 4">
-                <div class="thumb thumb00_{{$index}}" style="background-image:url({{photo.images[photo.images.length -1].source}})" ng-click="toggleGallery('studio')"></div>
+                <div class="thumb thumb00_{{$index}}" style="background-image:url({{photo.source}})" ng-click="toggleGallery('studio')"></div>
               </div>
             </div>
           </div>
