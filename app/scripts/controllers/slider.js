@@ -14,11 +14,8 @@ angular.module('skinandinkApp')
    	title: 'Homepage 1'
    }, {
    	src: './images/002.jpg',
-   	title: 'Homepage 2' 
-   }, {
-   	src: './images/003.jpg',
-   	title: 'Homepage 3'
-   }, {
+   	title: 'Homepage 2'
+   },  {
    	src: './images/004.jpg',
    	title: 'Homepage 4'
    }, {

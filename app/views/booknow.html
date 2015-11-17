@@ -7,24 +7,24 @@
         <div class="w-form">
           <form id="book-form" name="book_form">
             <h1>Personal Info</h1>
-            
+
             <label for="full_name">Full name</label>
             <input class="w-input form-input" id="full_name" type="text" placeholder="Enter your full name" name="full_name" ng-model="emailForm.full_name">
-            
+
             <label for="email-3">Email Address:</label>
             <input class="w-input" id="email-3" type="email" placeholder="Enter your email address" name="email" ng-model="emailForm.email">
-            
+
             <label for="telephone">Telephone number</label>
             <input class="w-input" id="telephone" type="text" placeholder="Enter your telephone number" name="telephone" required="required" ng-model="emailForm.telephone">
-            
+
             <div class="w-checkbox">
               <input class="w-checkbox-input" id="over_age" type="checkbox" name="over_age" ng-model="emailForm.over_age">
               <label class="w-form-label" for="personal_design">Are you over 18?</label>
-              <span style="color:red" ng-show="confirmAgeMsg"> 
+              <span style="color:red" ng-show="confirmAgeMsg">
               	<i class="fa fa-exclamation-triangle"></i> Please confirm your age
               </span>
             </div>
-            
+
             <span class="error" ng-show="book_form.$error.email">
                 <i class="fa fa-exclamation-triangle"></i> Please insert a valid email!
             </span>
@@ -36,10 +36,10 @@
       <div class="w-col w-col-6 form-right-col">
         <div class="w-form">
           	<h1>Tattoo Info</h1>
-            <label for="tattoo_artist">Tattoo Artist Name</label>
-            <select class="w-select" id="tattoo_artist" name="tattoo_artist" ng-model="emailForm.tattoo_artist" ng-options="artist.name as artist.name for artist in tattooArtistsName track by artist.name">
-            	<option value="">Choose artist name...</option>
-            </select>
+            <!--<label for="tattoo_artist">Tattoo Artist Name</label>-->
+            <!--<select class="w-select" id="tattoo_artist" name="tattoo_artist" ng-model="emailForm.tattoo_artist" ng-options="artist.name as artist.name for artist in tattooArtistsName track by artist.name">-->
+            	<!--<option value="">Choose artist name...</option>-->
+            <!--</select>-->
             <div class="w-row">
               <div class="w-col w-col-7">
                 <label for="tattoo_style">Tattoo style</label>

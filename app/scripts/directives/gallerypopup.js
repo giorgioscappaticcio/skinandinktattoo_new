@@ -55,14 +55,14 @@ angular.module('skinandinkApp')
 
       		$scope.resetActiveAll();
 
-            if ($scope.currentSection.isTattooGallery){
+          if ($scope.currentSection.isTattooGallery){
 	        	$scope.singleTattooIsVisible = true;
 	        	$scope.tattooIsActive = true;
 	        	$scope.currentSection.prev = $scope.currentSection.current;
-				$scope.currentSection.current = $scope.artistsSection;
+				    $scope.currentSection.current = $scope.artistsSection;
 	        } else {
 	        	$scope.currentSection.prev = $scope.currentSection.current;
-				$scope.currentSection.current = $scope.homeSection;
+				    $scope.currentSection.current = $scope.homeSection;
 	        }
 
 	        $scope.controlSlideAnimation.totalOut($scope.currentSection.prev, $scope.currentSection.current);
@@ -182,8 +182,8 @@ angular.module('skinandinkApp')
 	      				$scope.photosObjGallery = d.data;
 	      				for (var i=0; i<d.data.length; i++){
 	      					var pictures = {
-	      						src: d.data[i].images[0].source,
-	      						thumb:d.data[i].images[d.data[i].images.length -1].source
+                    src: d.data[i].source,
+                    thumb: d.data[i].source
 	      						}
 	      					$scope.photos.push(pictures);
 	      					$scope.galleryLoaded = true;

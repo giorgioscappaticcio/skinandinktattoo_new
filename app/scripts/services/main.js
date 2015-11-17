@@ -110,13 +110,13 @@ angular.module('skinandinkApp')
 
   	this.getFBPhotos = function(fbAlbum, d){
 
-      var fbInfoAPI = 'https://graph.facebook.com/'+fbAlbum+'/photos?fields=source&' + d;
+      var fbInfoAPI = 'https://graph.facebook.com/'+fbAlbum+'?fields=photos.limit(100000).fields(source)&' + d;
 
       var d = $q.defer();
 
       $http({method: 'GET', url: fbInfoAPI}).
         success(function(data, status, headers, config) {
-          var superData = data
+          var superData = data.photos;
           return d.resolve(superData)
         }).
         error(function(data, status, headers, config) {

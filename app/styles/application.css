@@ -21,17 +21,21 @@
 
 /* Slideshow Gallery */
 .w-row.leftside {
-    width: 21%;
-    position: relative;
-    margin-top: 2%;
-    float: left;
+  width: 20%;
+  position: relative;
+  padding-top: 2%;
+  float: left;
+  height: calc(100vh - 171px);
+  overflow-y: scroll;
 }
 
 .sliderGallery div{
   height: 100%;
   position:relative;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: #1B1B1B;
 }
 .arrowNav {
     cursor: pointer;
