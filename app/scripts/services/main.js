@@ -88,10 +88,10 @@ angular.module('skinandinkApp')
 		return d.promise;
   	};
 
-  	this.getFBInfo = function(fbID, d){
+  	this.getFBInfo = function(fbID, accessToken){
 
 
-          var fbInfoAPI = "https://graph.facebook.com/"+ fbID + "?fields=name,description,about,cover,location,phone&" + d;
+          var fbInfoAPI = "https://graph.facebook.com/"+ fbID + "?fields=name,description,about,cover,location,phone&access_token=" + accessToken;
 
           var d = $q.defer();
 
@@ -108,9 +108,9 @@ angular.module('skinandinkApp')
 
     };
 
-  	this.getFBPhotos = function(fbAlbum, d){
+  	this.getFBPhotos = function(fbAlbum, accessToken){
 
-      var fbInfoAPI = 'https://graph.facebook.com/'+fbAlbum+'?fields=photos.limit(100000).fields(source)&' + d;
+      var fbInfoAPI = 'https://graph.facebook.com/'+fbAlbum+'?fields=photos.limit(100000).fields(source)&access_token=' + accessToken;
 
       var d = $q.defer();
 

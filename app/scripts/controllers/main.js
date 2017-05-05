@@ -199,8 +199,8 @@ angular.module('skinandinkApp')
 
         CommonMain.getToken().then(function(response){
           if (response) {
-            $scope.token = response;
-            $rootScope.token = response;
+            $scope.token = response.access_token;
+            $rootScope.token = response.access_token;
 
             CommonMain.getFBInfo($scope.globalInfo.general[0].fb_id, $scope.token).then( function(c) {
               // success
