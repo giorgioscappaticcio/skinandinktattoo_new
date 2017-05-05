@@ -171,7 +171,7 @@ angular.module('skinandinkApp')
 
   	  	$http({
   	  		method: 'GET',
-  	  		url: 'http://giorgioscappaticcio.co.uk/skin_ink/admin/queries/send_email.php',
+  	  		url: callsUrl + 'send_email.php',
   	  		params: params
   	  	}).
 	    success(function(data, status, headers, config) {
